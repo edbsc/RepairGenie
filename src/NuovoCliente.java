@@ -64,6 +64,8 @@ public class NuovoCliente extends JFrame implements ActionListener, WindowListen
     public void actionPerformed(ActionEvent actionEvent) {
 
         Object element = actionEvent;
+        if(element== salva){this.dispose();}
+        if(element== esci){this.dispose();}
 
 
     }
