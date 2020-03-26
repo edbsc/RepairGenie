@@ -2,8 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
-public class NuovaPratica extends JFrame implements ActionListener
+public class NuovaPratica extends JFrame implements ActionListener, WindowListener
 {
     private JButton nuovo_cliente ;
     private JButton pratica_vecchio_cliente;
@@ -31,6 +33,7 @@ public class NuovaPratica extends JFrame implements ActionListener
         nuovo_cliente.addActionListener(this);
         pratica_vecchio_cliente.addActionListener(this);
         menu_principale.addActionListener(this);
+        this.addWindowListener(this);
 
     }
 
@@ -42,6 +45,48 @@ public class NuovaPratica extends JFrame implements ActionListener
         if(actionEvent.getSource()==menu_principale && !nc && !vc)
         {  MainWindow.is_win_opened=false; this.dispose(); }
         if(actionEvent.getSource()== nuovo_cliente && !nc && !vc){nc = true; p = new NuovoCliente();}
+
+    }
+
+    @Override
+    public void windowOpened(WindowEvent windowEvent) {
+
+    }
+
+    @Override
+    public void windowClosing(WindowEvent windowEvent) {
+        if(!vc&&!nc)
+        {MainWindow.is_win_opened=false; this.dispose();}
+
+
+
+
+    }
+
+    @Override
+    public void windowClosed(WindowEvent windowEvent) {
+
+
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent windowEvent) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent windowEvent) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent windowEvent) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent windowEvent) {
 
     }
 }

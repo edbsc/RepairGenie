@@ -84,6 +84,7 @@ public class NuovoCliente extends JFrame implements ActionListener, WindowListen
 
     @Override
     public void windowClosing(WindowEvent windowEvent) {
+        NuovaPratica.nc=false; this.dispose();
 
     }
 

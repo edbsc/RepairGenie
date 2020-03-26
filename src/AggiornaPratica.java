@@ -74,6 +74,8 @@ public class AggiornaPratica extends JFrame implements ActionListener
     public boolean checkcode(String code)
     {
         String s = code ;
+        if(s.isEmpty()){JOptionPane.showMessageDialog(this, "Codice non valido","Errore",JOptionPane.ERROR_MESSAGE);
+            return false;}
         if (s.length()>10) s = s.substring(0,9);
 
 
