@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -6,9 +7,27 @@ import java.awt.event.WindowListener;
 
 public class NuovaRiparazione extends JFrame implements ActionListener, WindowListener
 {
+    private String num_p;
+    private String cliente;
+    private String telefono;
+    private String data_inizio;
+    private String ultimo_agg;
+    private String desc_problema;
+    private String marca;
+    private String modello;
+    private String tipologia;
+
 
     NuovaRiparazione()
     {
+        Dimension desktop_screen = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(new Point((desktop_screen.width-this.getWidth())/2,(desktop_screen.height-this.getHeight())/2));
+        this.setSize(desktop_screen);
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        this.setTitle("Nuova pratica");
+        this.setResizable(true);
+        JPanel panel = new JPanel();
+        JLabel id1 = new JLabel("");
 
     }
 

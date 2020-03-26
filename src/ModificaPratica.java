@@ -51,6 +51,9 @@ public class ModificaPratica extends JFrame implements ActionListener, WindowLis
         descrizione_lavoro = new JTextArea(lavoro_prec_eseguito);
         descrizione_lavoro.setColumns(100);
         descrizione_lavoro.setRows(30);
+        JScrollPane scroll = new JScrollPane(descrizione_lavoro,
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         confirm = new JButton("Salva ed esci");
         indietro = new JButton("Indietro");
         elimina =  new JButton("Elimina la pratica");
@@ -64,7 +67,7 @@ public class ModificaPratica extends JFrame implements ActionListener, WindowLis
         panel.add(model);
         panel.add(type);
         panel.add(l);
-        panel.add(descrizione_lavoro);
+        panel.add(scroll);
         panel.add(chiusura_pratica);
         panel.add(in_consegna);
         panel.add(confirm);

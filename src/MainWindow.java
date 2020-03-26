@@ -13,6 +13,16 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     protected static boolean is_win_opened = false;
     public static void main(String[] args)
     {
+       try{ UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");}
+       catch (ClassNotFoundException e){System.out.println("cant found gtk");} catch (IllegalAccessException e) {
+           e.printStackTrace();
+       } catch (InstantiationException e) {
+           e.printStackTrace();
+       } catch (UnsupportedLookAndFeelException e) {
+           e.printStackTrace();
+       }
+
+
         new MainWindow();
 
     }
