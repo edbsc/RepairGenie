@@ -68,6 +68,7 @@ public class NuovoCliente extends JFrame implements ActionListener, WindowListen
         if(element== esci){this.dispose();}
 
 
+
     }
 
     @Override
