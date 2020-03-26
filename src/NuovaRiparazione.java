@@ -27,7 +27,13 @@ public class NuovaRiparazione extends JFrame implements ActionListener, WindowLi
         this.setTitle("Nuova pratica");
         this.setResizable(true);
         JPanel panel = new JPanel();
-        JLabel id1 = new JLabel("");
+        JLabel id1 = new JLabel("Numero Pratica :");
+        JLabel id2 = new JLabel("");
+        JLabel id3 = new JLabel("");
+        JLabel id4 = new JLabel("");
+        JLabel id5 = new JLabel("");
+        JLabel id6 = new JLabel("");
+        JLabel id7 = new JLabel("");
 
     }
 
