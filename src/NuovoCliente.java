@@ -28,7 +28,7 @@ public class NuovoCliente extends JFrame implements ActionListener, WindowListen
         this.setResizable(true);
         JPanel panel = new JPanel();
         //elementi pannello
-        incorrect_value = new JLabel("");
+        incorrect_value = new JLabel();
         incorrect_value.setForeground(Color.RED);
         JLabel id1  = new JLabel("Partita IVA o Codice Fiscale : ");
         piva_cf_t = new JTextField(30);
@@ -51,8 +51,12 @@ public class NuovoCliente extends JFrame implements ActionListener, WindowListen
         panel.add(incorrect_value);
         panel.add(salva);
         panel.add(esci);
+        salva.addActionListener(this);
+        esci.addActionListener(this);
+        this.addWindowListener(this);
         this.add(panel);
         this.setVisible(true);
+
 
 
 
@@ -63,9 +67,11 @@ public class NuovoCliente extends JFrame implements ActionListener, WindowListen
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
 
-        Object element = actionEvent;
-        if(element== salva){this.dispose();}
-        if(element== esci){this.dispose();}
+        Object element = actionEvent.getSource();
+        if(element== salva){
+            if (checkData()) {NuovaPratica.nc=false; this.dispose();}
+        }
+        if(element== esci){NuovaPratica.nc=false;this.dispose();}
 
 
 
@@ -104,5 +110,103 @@ public class NuovoCliente extends JFrame implements ActionListener, WindowListen
     @Override
     public void windowDeactivated(WindowEvent windowEvent) {
 
+    }
+    public boolean checkData()
+    {
+        piva_cf= piva_cf_t.getText();
+        indirizzo=indirizzo_t.getText();
+        ragsociale_nominativo=ragsociale_nominativo_t.getText();
+        cellphone=cellphone_t.getText();
+        incorrect_value.setText("");
+        String errors ="";
+        boolean inc_val=false;
+        // controllo piva o cf
+        if(piva_cf.length()!= 11 && piva_cf.length() != 16)
+            errors= "P. IVA o CF non valido : ";
+        if(piva_cf.length()==11)
+        {
+            for (int i=0 ; i<piva_cf.length(); i++)
+            {
+                if(piva_cf.charAt(i)>('0'-1)&&piva_cf.charAt(i)<('9'+1))continue;
+                else
+                    {
+                    errors=errors+"P. IVA non valida ";
+                    break;
+                    }
+
+            }
+
+        }
+        if(piva_cf.length()==16)
+        {
+            for (int i=0 ; i<piva_cf.length(); i++)
+            {
+                if(piva_cf.charAt(i)>('0'-1)&&piva_cf.charAt(i)<('9'+1)
+                 && piva_cf.charAt(i)>('A'-1)&&piva_cf.charAt(i)<('Z'+1)
+                       && piva_cf.charAt(i)>('a'-1)&&piva_cf.charAt(i)<('z'+1)
+                )continue;
+                else {
+                    errors = errors + " CF non valido ";
+                    break;
+                }
+            }
+        }
+        //controllo indirizzo (sql injection)
+        inc_val = false;
+        if(indirizzo.length()==0)errors = errors + "indirizzo non valido ";
+        for (int i=0 ; i<indirizzo.length(); i++)
+        {
+            switch (indirizzo.charAt(i))
+            {
+                case ';':
+
+                case '=':
+
+                case '(':
+
+                case ')':
+                    inc_val =true;
+            }
+            if(inc_val)
+            {
+                errors = errors + "indirizzo non valido";
+                break;
+            }
+        }
+        inc_val=false;
+        //controllo rag sociale (sql injection)
+        if(ragsociale_nominativo.length()==0)errors = errors + "ragione soc./ nominativo non valido ";
+        for (int i=0 ; i<ragsociale_nominativo.length(); i++)
+        {
+            switch (ragsociale_nominativo.charAt(i))
+            {
+                case ';':
+
+                case '=':
+
+                case '(':
+
+                case ')':
+                    inc_val=true;
+
+            }
+            if(inc_val)
+            {
+                errors=errors+" ragione soc./ nominativo non valido";
+                break;
+            }
+        }
+        //controllo telefon
+        if(cellphone.length()==0)errors = errors + "telefono non valido ";
+        for (int i=0 ; i<cellphone.length(); i++)
+        {
+            if(cellphone.charAt(i)>('0'-1)&&cellphone.charAt(i)<('9'+1))continue;
+            else
+            {   errors=errors+" telefono non valido "; break;}
+
+        }
+        incorrect_value.setText(errors);
+        if(incorrect_value.getText().length()==0)return true;
+        else return false;
     }
 }
