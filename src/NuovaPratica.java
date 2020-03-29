@@ -45,7 +45,7 @@ public class NuovaPratica extends JFrame implements ActionListener, WindowListen
         if(actionEvent.getSource()==menu_principale && !nc && !vc)
         {  MainWindow.is_win_opened=false; this.dispose(); }
         if(actionEvent.getSource()== nuovo_cliente && !nc && !vc){nc = true; p = new NuovoCliente();}
-
+        if(actionEvent.getSource()== pratica_vecchio_cliente && !nc && !vc){vc = true; p = new NuovaRiparazione();}
     }
 
     @Override
